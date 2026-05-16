@@ -1,11 +1,11 @@
 {
-    "name": "conflictura",
-    "preductname": "Conflictura Launcher",
-    "version": "4.0.1",
-    "description": "Conflictura modded server launcher",
+    "name": "DemonRay",
+    "preductname": "DemonRay Launcher",
+    "version": "1.0.0",
+    "description": "Launcher pour le serveur RP - DemonRay",
     "main": "src/app.js",
-    "author": "Riptiaz/Boulldogo/Vexato/Luuxis",
-    "env": "azuriom",
+    "author": "EnOxs, AXO, Riptiaz/Boulldogo/Vexato/Luuxis",
+    "env": "panel",
     "settings": "https://conflictura.eu",
     "scripts": {
         "start": "cross-env-shell NODE_ENV=dev electron .",
@@ -38,6 +38,6 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/Riptiaz/CentralCorp-Launcher.git"
+        "url": "git+https://github.com/EnOx-S/DemonRayLauncher"
     }
 }
