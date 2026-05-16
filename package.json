@@ -29,10 +29,10 @@
     },
     "devDependencies": {
         "cross-env": "^7.0.3",
-        "electron": "^37.2.0",
+        "electron": "^42.1.0",
         "electron-builder": "^26.6.0",
         "javascript-obfuscator": "^4.1.0",
-        "jimp": "^0.22.12",
+        "jimp": "^1.6.1",
         "nodemon": "^3.1.9",
         "png2icons": "^2.0.1"
     },
