@@ -85,7 +85,8 @@ function accountSelect(uuid) {
 function headplayer(pseudo) {
     const azauth = getAzAuthUrl();
     const timestamp = new Date().getTime();
-    const skin_url = `${azauth}api/skin-api/avatars/face/${pseudo}/?t=${timestamp}`;
+    //const skin_url = `${azauth}api/skin-api/avatars/face/${pseudo}/?t=${timestamp}`;
+    const skin_url = `https://minotar.net/helm/${pseudo}/100.png?t=${timestamp}`;
     document.querySelector(".player-head").style.backgroundImage = `url(${skin_url})`;
 }
 
