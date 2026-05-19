@@ -15,6 +15,12 @@ const fs = require('fs');
 const launch = new Launch();
 const pkg = require('../package.json');
 const settings_url = pkg.user ? `${pkg.settings}/${pkg.user}` : pkg.settings;
+const SOCIAL_LINKS = {
+    web: "https://demonray.craftserv.fr",
+    discord: "https://demonray.craftserv.fr/discord",
+    youtube: "https://www.youtube.com/@DemonRay_Officiel/featured",
+    tiktok: "https://www.tiktok.com/@demonrayoff"
+};
 
 
 const dataDirectory = process.env.APPDATA || (process.platform == 'darwin' ? `${process.env.HOME}/Library/Application Support` : process.env.HOME);
@@ -33,6 +39,7 @@ class Home {
         this.initLaunch();
         this.initStatusServer();
         this.initBtn();
+        this.initSocialBtns();
         this.initVideo();
         this.initAdvert();
         this.verifyModsBeforeLaunch();
@@ -100,13 +107,15 @@ class Home {
             const playBtn = document.querySelector('.play-btn');
             const info = document.querySelector(".text-download");
             const progressBar = document.querySelector(".progress-bar");
+            const downloadContent = document.querySelector(".download-content");
 
             playBtn.style.display = "none";
+            downloadContent.style.display = "flex";
             info.style.display = "block";
             launch.Launch(opts);
 
             const launcherSettings = (await this.database.get('1234', 'launcher')).value;
-            this.setupLaunchListeners(launch, info, progressBar, playBtn, launcherSettings);
+            this.setupLaunchListeners(launch, info, progressBar, playBtn, downloadContent, launcherSettings);
         });
     }
 
@@ -157,15 +166,15 @@ class Home {
         return pkg.env === 'azuriom' ? `${baseUrl}api/centralcorp/files` : `${baseUrl}data/`;
     }
 
-    setupLaunchListeners(launch, info, progressBar, playBtn, launcherSettings) {
+    setupLaunchListeners(launch, info, progressBar, playBtn, downloadContent, launcherSettings) {
         launch.on('extract', extract => console.log(extract));
         launch.on('progress', (progress, size) => this.updateProgressBar(progressBar, info, progress, size, t('download')));
         launch.on('check', (progress, size) => this.updateProgressBar(progressBar, info, progress, size, t('verification')));
         launch.on('estimated', time => console.log(this.formatTime(time)));
         launch.on('speed', speed => console.log(`${(speed / 1067008).toFixed(2)} Mb/s`));
         launch.on('patch', patch => info.innerHTML = t('patch_in_progress'));
-        launch.on('data', e => this.handleLaunchData(e, info, progressBar, playBtn, launcherSettings));
-        launch.on('close', code => this.handleLaunchClose(code, info, progressBar, playBtn, launcherSettings));
+        launch.on('data', e => this.handleLaunchData(e, info, progressBar, playBtn, downloadContent, launcherSettings));
+        launch.on('close', code => this.handleLaunchClose(code, info, progressBar, playBtn, downloadContent, launcherSettings));
         launch.on('error', err => console.log(err));
     }
 
@@ -184,19 +193,21 @@ class Home {
         return `${hours}h ${minutes}m ${seconds}s`;
     }
 
-    handleLaunchData(e, info, progressBar, playBtn, launcherSettings) {
+    handleLaunchData(e, info, progressBar, playBtn, downloadContent, launcherSettings) {
         new logger('Minecraft', '#36b030');
         if (launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-hide");
         ipcRenderer.send('main-window-progress-reset');
         progressBar.style.display = "none";
+        downloadContent.style.display = "flex";
         info.innerHTML = t('starting');
         console.log(e);
     }
 
-    handleLaunchClose(code, info, progressBar, playBtn, launcherSettings) {
+    handleLaunchClose(code, info, progressBar, playBtn, downloadContent, launcherSettings) {
         if (launcherSettings.launcher.close === 'close-launcher') ipcRenderer.send("main-window-show");
         progressBar.style.display = "none";
         info.style.display = "none";
+        downloadContent.style.display = "none";
         playBtn.style.display = "block";
         info.innerHTML = t('verification');
         new logger('Launcher', '#7289da');
@@ -304,6 +315,31 @@ class Home {
         document.querySelector('.settings-btn').addEventListener('click', () => {
             changePanel('settings');
         });
+    }
+
+    initSocialBtns() {
+        const socials = {
+            web: this.config.website_url || this.config.site_url || this.config.website || SOCIAL_LINKS.web || settings_url,
+            discord: this.config.discord_url || this.config.discord || this.config.discord_invite || SOCIAL_LINKS.discord,
+            youtube: this.config.youtube_url || this.config.youtube || this.config.video_channel_url || SOCIAL_LINKS.youtube,
+            tiktok: this.config.tiktok_url || this.config.tiktok || SOCIAL_LINKS.tiktok
+        };
+
+        const bind = (id, url) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (!url) {
+                el.style.opacity = '0.45';
+                el.style.cursor = 'not-allowed';
+                return;
+            }
+            el.addEventListener('click', () => shell.openExternal(url));
+        };
+
+        bind('social-web-btn', socials.web);
+        bind('social-discord-btn', socials.discord);
+        bind('social-youtube-btn', socials.youtube);
+        bind('social-tiktok-btn', socials.tiktok);
     }
 
     async getDate(e) {

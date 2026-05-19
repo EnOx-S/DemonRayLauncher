@@ -3,6 +3,16 @@
     height: 100%;
     padding-top: 26px;
     box-sizing: border-box;
+    position: relative;
+}
+
+.settings-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 20% 20%, rgba(0, 255, 136, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(255, 0, 110, 0.07) 0%, transparent 45%);
 }
 
 .tabs-settings-btn {
@@ -18,7 +28,8 @@
     align-items: center;
     background: rgba(10, 10, 12, 0.7);
     backdrop-filter: blur(20px);
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-right: 1px solid rgba(0, 255, 136, 0.24);
+    box-shadow: inset -10px 0 24px rgba(0, 255, 136, 0.08);
 }
 
 .tab-btn-css {
@@ -40,9 +51,10 @@
 
 .tab-btn-css:hover {
     background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(0, 255, 136, 0.34);
     color: #ffffff;
     transform: translateX(4px);
+    box-shadow: 0 0 14px rgba(0, 255, 136, 0.14);
 }
 
 .tab-btn-css i {
@@ -58,34 +70,33 @@
 }
 
 .active-tab-btn {
-    background: var(--accent-color-subtle, rgba(0, 189, 122, 0.15));
-    border-color: var(--accent-color, #00bd7a);
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.18) 0%, rgba(255, 0, 110, 0.14) 100%);
+    border-color: rgba(0, 255, 136, 0.9);
     color: #ffffff;
-    box-shadow: 0 0 20px var(--accent-color-glow, rgba(0, 189, 122, 0.3));
+    box-shadow: 0 0 22px rgba(0, 255, 136, 0.22), 0 0 12px rgba(255, 0, 110, 0.16);
 }
 
 .active-tab-btn:hover {
-    background: var(--accent-color-subtle, rgba(0, 189, 122, 0.2));
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.22) 0%, rgba(255, 0, 110, 0.18) 100%);
     transform: translateX(0);
 }
 
 .save-tabs-btn {
     margin-top: auto !important;
-    background: linear-gradient(180deg, var(--accent-color, #00bd7a) 0%, var(--accent-color-dark, #00a066) 100%);
-    border-color: transparent;
-    color: #0a0a0a;
+    background: rgba(0, 255, 136, 0.14);
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    color: #ffffff;
     font-weight: 600;
     justify-content: center;
-    box-shadow: 0 2px 10px var(--accent-color-glow, rgba(0, 189, 122, 0.25));
+    box-shadow: none;
 }
 
 .save-tabs-btn:hover {
-    background: linear-gradient(180deg, var(--accent-color, #00bd7a) 0%, var(--accent-color-dark, #00a066) 100%);
-    filter: brightness(1.1);
-    box-shadow: 0 4px 18px var(--accent-color-glow, rgba(0, 189, 122, 0.4));
+    background: rgba(0, 255, 136, 0.24);
+    box-shadow: 0 0 12px rgba(0, 255, 136, 0.18);
     transform: none;
-    border-color: transparent;
-    color: #0a0a0a;
+    border-color: rgba(0, 255, 136, 0.42);
+    color: #ffffff;
 }
 
 .tabs-settings-content {
@@ -101,6 +112,10 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    background: rgba(10, 10, 16, 0.35);
+    border: 1px solid rgba(0, 255, 136, 0.14);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
 }
 
 .active-tab-content {
@@ -290,7 +305,7 @@
 
 .java-settings {
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 255, 136, 0.2);
     border-radius: 14px;
     width: 100%;
     max-width: 600px;
@@ -674,7 +689,7 @@
     padding: 20px;
     border-radius: 14px;
     background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 255, 136, 0.2);
     max-width: 700px;
 }
 
@@ -717,8 +732,8 @@
 }
 
 .mods-container:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.12);
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(255, 0, 110, 0.08) 100%);
+    border-color: rgba(0, 255, 136, 0.28);
 }
 
 .mods-container-empty {

@@ -32,7 +32,6 @@ class Settings {
         this.updateModsConfig();
         this.initOptionalMods();
         this.headplayer();
-        this.initSkinDropzone();
     }
 
     initSkinDropzone() {
@@ -113,7 +112,6 @@ class Settings {
         document.querySelector('.player-role').innerHTML = '';
         document.querySelector('.player-monnaie').innerHTML = '';
         await this.initOthers();
-        await this.initPreviewSkin();
         await this.updateAccountImage();
         hideLoadingOverlay();
     }
@@ -124,7 +122,8 @@ class Settings {
         const pseudo = account.name;
         const azauth = this.getAzAuthUrl();
         const timestamp = new Date().getTime();
-        const skin_url = `${azauth}api/skin-api/avatars/face/${pseudo}/?t=${timestamp}`;
+        //const skin_url = `${azauth}api/skin-api/avatars/face/${pseudo}/?t=${timestamp}`;
+        const skin_url = `https://minotar.net/helm/${pseudo}/100.png?t=${timestamp}`;
         document.querySelector(".player-head").style.backgroundImage = `url(${skin_url})`;
     }
 
@@ -138,7 +137,7 @@ class Settings {
         if (accountDiv) {
             const accountImage = accountDiv.querySelector('.account-image');
             if (accountImage) {
-                accountImage.src = `${azauth}api/skin-api/avatars/face/${account.name}/?t=${timestamp}`;
+                accountImage.src = `https://minotar.net/helm/${account.name}/100.png?t=${timestamp}`;
             } else {
                 console.error('Image not found in the selected account div.');
             }
@@ -654,7 +653,6 @@ class Settings {
         document.getElementById('ram-tab').innerHTML = `<i class="fab fa-java"></i><span>${t('ram_settings')}</span>`;
         document.getElementById('launch-tab').innerHTML = `<i class="fas fa-rocket"></i><span>${t('launcher_loading')}</span>`;
         document.getElementById('mods-tab').innerHTML = `<i class="fas fa-puzzle-piece"></i><span>${t('optional_mods')}</span>`;
-        document.getElementById('skin-tab').innerHTML = `<i class="fas fa-tshirt"></i><span>${t('skin')}</span>`;
         document.getElementById('save-tab').innerHTML = `<i class="fas fa-save"></i><span>${t('save')}</span>`;
 
         document.getElementById('add-account-btn').innerHTML = `<i class="fas fa-plus"></i> <span>${t('add_account')}</span>`;
@@ -668,16 +666,6 @@ class Settings {
         document.getElementById('open-launcher-text').textContent = t('open_launcher');
         document.getElementById('mods-title').textContent = t('optional_mods');
         document.getElementById('mods-info').innerHTML = t('mods_detailed_info');
-        document.getElementById('skin-title').textContent = t('skin');
-
-        const dropzoneText = document.getElementById('dropzone-text');
-        if (dropzoneText) dropzoneText.textContent = t('dropzone_drag');
-        const dropzoneSubtext = document.querySelector('.dropzone-subtext');
-        if (dropzoneSubtext) dropzoneSubtext.textContent = t('dropzone_click');
-        const dropzoneReq = document.querySelector('.dropzone-requirements');
-        if (dropzoneReq) dropzoneReq.textContent = t('dropzone_requirements');
-        const dropzoneHoverSpan = document.querySelector('.dropzone-hover-state span');
-        if (dropzoneHoverSpan) dropzoneHoverSpan.textContent = t('dropzone_drop');
     }
 
     async initSettingsDefault() {

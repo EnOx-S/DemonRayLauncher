@@ -62,9 +62,9 @@ function addAccount(data) {
     const timestamp = new Date().getTime();
     const div = document.createElement("div");
     div.classList.add("account");
-    div.id = data.uuid;
+    div.id = data.uuid; // ${azauth}api/skin-api/avatars/face/${data.name}/?t=${timestamp}
     div.innerHTML = `
-        <img class="account-image" src="${azauth}api/skin-api/avatars/face/${data.name}/?t=${timestamp}">
+        <img class="account-image" src="https://minotar.net/helm/${data.name}/100.png?t=${timestamp}" alt="${data.name}">
         <div class="account-name">${data.name}</div>
         <div class="account-uuid">${data.uuid}</div>
         <div class="account-delete"><div class="icon-account-delete icon-account-delete-btn"></div></div>
