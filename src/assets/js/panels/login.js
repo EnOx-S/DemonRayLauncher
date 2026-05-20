@@ -89,24 +89,25 @@ class Login {
 
     updateWhitelist(account) {
         const playBtn = document.querySelector(".play-btn");
+        const playText = playBtn ? playBtn.querySelector(".play-text") : null;
         if (this.config.whitelist_activate &&
             (!this.config.whitelist.includes(account.name) &&
                 !this.config.whitelist_roles.includes(account.user_info.role.name))) {
             playBtn.style.backgroundColor = "#696969";
             playBtn.style.pointerEvents = "none";
             playBtn.style.boxShadow = "none";
-            playBtn.textContent = t('unavailable');
+            if (playText) playText.textContent = t('unavailable');
         } else {
             playBtn.style.backgroundColor = "#00bd7a";
             playBtn.style.pointerEvents = "auto";
             playBtn.style.boxShadow = "2px 2px 5px rgba(0, 0, 0, 0.3)";
-            playBtn.textContent = t('play');
+            if (playText) playText.textContent = t('play');
         }
     }
 
     updateBackground(account) {
         return new Promise((resolve) => {
-            const defaultBg = '../src/assets/images/background/light.jpg';
+            const defaultBg = '../src/assets/images/background/2.jpg';
             let backgroundUrl = null;
 
             if (this.config.role_data && account.user_info && account.user_info.role) {

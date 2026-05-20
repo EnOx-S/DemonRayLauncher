@@ -178,6 +178,7 @@ class Settings {
 
     updateWhitelist(account) {
         const playBtn = document.querySelector(".play-btn");
+        const playText = playBtn ? playBtn.querySelector(".play-text") : null;
 
         if (this.config.whitelist_activate &&
             (!this.config.whitelist.includes(account.name) &&
@@ -185,19 +186,19 @@ class Settings {
             playBtn.style.background = "#696969";
             playBtn.style.pointerEvents = "none";
             playBtn.style.boxShadow = "none";
-            playBtn.textContent = t('unavailable');
+            if (playText) playText.textContent = t('unavailable');
         } else {
             playBtn.style.background = "";
             playBtn.style.pointerEvents = "auto";
             playBtn.style.boxShadow = "";
             playBtn.style.opacity = "1";
-            playBtn.textContent = t('play');
+            if (playText) playText.textContent = t('play');
         }
     }
 
     updateBackground(account) {
         return new Promise((resolve) => {
-            const defaultBg = '../src/assets/images/background/light.jpg';
+            const defaultBg = '../src/assets/images/background/2.jpg';
             let backgroundUrl = null;
 
             if (this.config.role_data && account.user_info && account.user_info.role) {

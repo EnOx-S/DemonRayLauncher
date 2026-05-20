@@ -312,7 +312,7 @@ class Launcher {
 
     preloadBackground(account) {
         return new Promise((resolve) => {
-            const defaultBg = '../src/assets/images/background/light.jpg';
+            const defaultBg = '../src/assets/images/background/2.jpg';
             let backgroundUrl = null;
 
             if (this.config.role_data && account.user_info && account.user_info.role) {
@@ -368,7 +368,7 @@ class Launcher {
     }
 
     updateBackground(account) {
-        const defaultBg = '../src/assets/images/background/light.jpg';
+        const defaultBg = '../src/assets/images/background/2.jpg';
         let backgroundUrl = null;
 
         if (this.config.role_data && account.user_info && account.user_info.role) {

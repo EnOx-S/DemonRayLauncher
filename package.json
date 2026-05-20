@@ -1,10 +1,10 @@
 {
-    "name": "DemonRay",
-    "preductname": "DemonRay Launcher",
+    "name": "demonray-launcher",
+    "productName": "DemonRay Launcher",
     "version": "1.0.0",
     "description": "Launcher pour le serveur RP - DemonRay",
     "main": "src/app.js",
-    "author": "EnOxs, AXO, Riptiaz/Boulldogo/Vexato/Luuxis",
+    "author": "EnOx_S, AXO, Riptiaz/Boulldogo/Vexato/Luuxis",
     "env": "panel",
     "settings": "https://web-enoxs.prismo-host.fr",
     "scripts": {

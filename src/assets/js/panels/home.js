@@ -21,6 +21,13 @@ const SOCIAL_LINKS = {
     youtube: "https://www.youtube.com/@DemonRay_Officiel/featured",
     tiktok: "https://www.tiktok.com/@demonrayoff"
 };
+const FEATURE_LINKS = {
+    news: "https://demonray.craftserv.fr/news",
+    shop: "https://demonray.craftserv.fr/shop",
+    vote: "https://demonray.craftserv.fr/vote",
+    wiki: "https://demonray.craftserv.fr/wiki",
+    discord: "https://demonray.craftserv.fr/discord"
+};
 
 
 const dataDirectory = process.env.APPDATA || (process.platform == 'darwin' ? `${process.env.HOME}/Library/Application Support` : process.env.HOME);
@@ -40,6 +47,7 @@ class Home {
         this.initStatusServer();
         this.initBtn();
         this.initSocialBtns();
+        this.initFeatureCards();
         this.initVideo();
         this.initAdvert();
         this.verifyModsBeforeLaunch();
@@ -340,6 +348,33 @@ class Home {
         bind('social-discord-btn', socials.discord);
         bind('social-youtube-btn', socials.youtube);
         bind('social-tiktok-btn', socials.tiktok);
+    }
+
+    initFeatureCards() {
+        const links = {
+            news: this.config.news_url || this.config.news || this.config.website_url || FEATURE_LINKS.news,
+            shop: this.config.shop_url || this.config.boutique_url || this.config.store_url || FEATURE_LINKS.shop,
+            vote: this.config.vote_url || this.config.votes_url || FEATURE_LINKS.vote,
+            wiki: this.config.wiki_url || FEATURE_LINKS.wiki,
+            discord: this.config.discord_url || this.config.discord || this.config.discord_invite || FEATURE_LINKS.discord
+        };
+
+        const bindFeature = (id, url) => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (!url) {
+                el.style.opacity = '0.7';
+                el.style.cursor = 'not-allowed';
+                return;
+            }
+            el.addEventListener('click', () => shell.openExternal(url));
+        };
+
+        bindFeature('feature-news', links.news);
+        bindFeature('feature-shop', links.shop);
+        bindFeature('feature-vote', links.vote);
+        bindFeature('feature-wiki', links.wiki);
+        bindFeature('feature-discord', links.discord);
     }
 
     async getDate(e) {
