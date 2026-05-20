@@ -52,9 +52,11 @@ class Login {
         const websiteUrl = pkg.env === 'azuriom' ? `${baseUrl}` : this.config.azauth;
         const uuid = (await this.database.get('1234', 'accounts-selected')).value;
         const account = (await this.database.get(uuid.selected, 'accounts')).value;
+        const skinTitle = document.querySelector('.player-skin-title');
+        const skinRenderer = document.querySelector('.skin-renderer-settings');
 
-        document.querySelector('.player-skin-title').innerHTML = `${t('skin_of')} ${account.name}`;
-        document.querySelector('.skin-renderer-settings').src = `${websiteUrl}skin3d/3d-api/skin-api/${account.name}`;
+        if (skinTitle) skinTitle.innerHTML = `${t('skin_of')} ${account.name}`;
+        if (skinRenderer) skinRenderer.src = `${websiteUrl}skin3d/3d-api/skin-api/${account.name}`;
     }
 
     async initOthers() {
