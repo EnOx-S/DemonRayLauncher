@@ -304,6 +304,7 @@ class Home {
 
     async initAdvert() {
         const advertBanner = document.querySelector('.advert-banner');
+        if (!advertBanner) return;
         if (this.config.alert_activate) {
             const message = this.config.alert_msg;
             const firstParagraph = message.split('</p>')[0] + '</p>';
