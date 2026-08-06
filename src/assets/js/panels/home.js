@@ -16,17 +16,17 @@ const launch = new Launch();
 const pkg = require('../package.json');
 const settings_url = pkg.user ? `${pkg.settings}/${pkg.user}` : pkg.settings;
 const SOCIAL_LINKS = {
-    web: "https://demonray.craftserv.fr",
-    discord: "https://demonray.craftserv.fr/discord",
+    web: "https://demonray.wstr.fr",
+    discord: "https://demonray.wstr.fr/discord",
     youtube: "https://www.youtube.com/@DemonRay_Officiel/featured",
     tiktok: "https://www.tiktok.com/@demonrayoff"
 };
 const FEATURE_LINKS = {
-    news: "https://demonray.craftserv.fr/news",
-    shop: "https://demonray.craftserv.fr/shop",
-    vote: "https://demonray.craftserv.fr/vote",
-    wiki: "https://demonray.craftserv.fr/wiki",
-    discord: "https://demonray.craftserv.fr/discord"
+    news: "https://demonray.wstr.fr/news",
+    shop: "https://demonray.wstr.fr/shop",
+    vote: "https://demonray.wstr.fr/vote",
+    wiki: "https://demonray.wstr.fr/wiki",
+    discord: "https://demonray.wstr.fr/discord"
 };
 
 
